@@ -11,8 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Woods
+  - Nuts
   - 
   - 
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BackGround
+    uniqueID: 1079680567
+    locked: 0
+  - name: Element
+    uniqueID: 3226515575
+    locked: 0
+  - name: NailsBottom
+    uniqueID: 1050024397
+    locked: 0
+  - name: NailsHead
+    uniqueID: 1492218407
     locked: 0

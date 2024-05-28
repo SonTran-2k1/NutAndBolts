@@ -1,33 +1,92 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Ring;
+using UnityEngine.Serialization;
 
 namespace Controller
 {
     #region Component
 
+    #region Main Game
+
+    public enum StateGame
+    {
+        Empty,
+        Move,
+        Win,
+        Lose
+    }
+
+    public enum StateNail
+    {
+        Down,
+        Up
+    }
+
+    public enum StateDot
+    {
+        HaveNot,
+        Have
+    }
+
     [Serializable]
     public class GameController
     {
-        [HeaderTextColor(0.9f, .1f, .1f, headerText = "Game Controller")] [ChangeColorLabel(0.2f, 1, 1)]
-        public GameObject _player;
+        [HeaderTextColor(0.9f, .1f, .1f, headerText = "Move for Nail Controller")] [ChangeColorLabel(0.2f, 1, 1)]
+        public List<DotManager> listNail;
+
+        [ReadOnly] [ChangeColorLabel(0.2f, 1, 1)]
+        public NailManager nailCurrent;
+
+        [ReadOnly] [ChangeColorLabel(0.2f, 1, 1)]
+        public StateGame stateGamePlay;
+
+        [ChangeColorLabel(0.2f, 1, 1)] public Tween tweenMoveNail;
     }
 
     [Serializable]
-    public class PlayerController
+    public class DotController
     {
-        [HeaderTextColor(0.9f, .1f, .1f, headerText = "Player Controller")] [ChangeColorLabel(0.2f, 1, 1)]
-        public Rigidbody _rigidbodyWeapon;
+        [HeaderTextColor(0.9f, .1f, .1f, headerText = "Dot Controller")] [ChangeColorLabel(0.2f, 1, 1)]
+        public Collider2D myDotCollider;
+
+        [ReadOnly] [ChangeColorLabel(0.2f, 1, 1)]
+        public Collider2D DotCollider;
+
+        [ReadOnly] [ChangeColorLabel(0.2f, 1, 1)]
+        public StateDot stateDot;
     }
 
     [Serializable]
-    public class BotController
+    public class NailController
     {
-        [HeaderTextColor(0.9f, .1f, .1f, headerText = "Bot Controller")] [ChangeColorLabel(0.2f, 1, 1)]
-        public Rigidbody _rigidbodyBot;
+        [HeaderTextColor(0.9f, .1f, .1f, headerText = "Sprites Nail")] [ChangeColorLabel(0.2f, 1, 1)]
+        public Transform headNail;
+
+        [ChangeColorLabel(0.2f, 1, 1)] public Transform parentNail;
+        //[ChangeColorLabel(0.2f, 1, 1)] public Transform bottomNail;
+
+        [ReadOnly] [ChangeColorLabel(0.2f, 1, 1)]
+        public float upPosition;
+
+        [ReadOnly] [ChangeColorLabel(0.2f, 1, 1)]
+        public float downPosition;
+
+        [ReadOnly] [ChangeColorLabel(0.2f, 1, 1)]
+        public StateNail stateNail;
     }
+
+    [Serializable]
+    public class WoodController
+    {
+        [HeaderTextColor(0.9f, .1f, .1f, headerText = "Sprites Nail")] [ChangeColorLabel(0.2f, 1, 1)]
+        public List<HingeJoint2D> listJoint;
+    }
+
+    #endregion
 
     [Serializable]
     public class MusicController
@@ -43,7 +102,9 @@ namespace Controller
     public class UiController
     {
         [HeaderTextColor(0.9f, .1f, .1f, headerText = "Ui Controller")] [ChangeColorLabel(0.2f, 1, 1)]
-        public GameObject _winGameObject;
+        public GameObject winPopup;
+
+        [ChangeColorLabel(0.2f, 1, 1)] public GameObject losePopup;
     }
 
     [Serializable]
@@ -60,7 +121,7 @@ namespace Controller
 
 #region Base Method
 
-    public abstract class RingSingleton<T> : MonoBehaviour where T : RingSingleton<T>
+public abstract class RingSingleton<T> : MonoBehaviour where T : RingSingleton<T>
 {
     private static T _instance;
 
@@ -107,5 +168,4 @@ namespace Controller
     }
 }
 
-
-    #endregion Base Method
+#endregion Base Method

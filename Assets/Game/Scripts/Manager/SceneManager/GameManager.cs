@@ -6,8 +6,7 @@ using Controller;
 
 public class GameManager : RingSingleton<GameManager>
 {
-    public GameController _gameController;
-
+    public GameController gameController;
     private void Start()
     {
         QualitySettings.vSyncCount = 0;
@@ -19,4 +18,8 @@ public class GameManager : RingSingleton<GameManager>
     {
     }
 
+    public void UpdateStateGame(StateGame stateGame)
+    {
+        gameController.stateGamePlay = stateGame;
+    }
 }
