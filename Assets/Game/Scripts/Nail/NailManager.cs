@@ -15,6 +15,15 @@ public class NailManager : MonoBehaviour
     {
         nailController.upPosition = transform.localPosition.y + Settings.Nail_MoveUp;
         nailController.downPosition = transform.localPosition.y;
+        Init();
+    }
+
+    void Init() //khởi tạo giá trị mặc định ban đầu cho dot
+    {
+        if (nailController.currentDot != null)
+        {
+            nailController.currentDot.dotController.stateDot = StateDot.Have;
+        }
     }
 
     private void OnMouseDown()
@@ -63,7 +72,10 @@ public class NailManager : MonoBehaviour
         GameManager.Instance.UpdateStateGame(StateGame.Move);
         GameManager.Instance.gameController.tweenMoveNail =
             this.nailController.parentNail.DOMove(Destination, Settings.Nail_TimeMoveToDestination).SetEase(Ease.Linear)
-                .OnStart((() => { woodManager.woodController.listJoint[0].enabled = false; })).OnComplete((
+                .OnStart((() =>
+                {
+                    woodManager.woodController.listJoint[(int)nailController.stateNumberNail].enabled = false;
+                })).OnComplete((
                     () =>
                     {
                         GameManager.Instance.UpdateStateGame(StateGame.Empty);

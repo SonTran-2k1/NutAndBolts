@@ -70,6 +70,7 @@ public class DotManager : MonoBehaviour
         if (GameManager.Instance.gameController.nailCurrent != null)
         {
             GameManager.Instance.gameController.nailCurrent.MoveToDestination(transform.position);
+            dotController.stateDot = StateDot.Have;
         }
     }
 }

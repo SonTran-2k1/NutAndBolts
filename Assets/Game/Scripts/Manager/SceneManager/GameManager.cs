@@ -16,6 +16,7 @@ public class GameManager : RingSingleton<GameManager>
     // Update is called once per frame
     private void Update()
     {
+        
     }
 
     public void UpdateStateGame(StateGame stateGame)

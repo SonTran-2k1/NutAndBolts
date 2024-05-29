@@ -32,6 +32,17 @@ namespace Controller
         Have
     }
 
+    public enum StateNumberNails
+    {
+        Nail_1 = 0,
+        Nail_2 = 1,
+        Nail_3 = 2,
+        Nail_4 = 3,
+        Nail_5 = 4,
+        Nail_6 = 5,
+        Nail_7 = 6
+    }
+
     [Serializable]
     public class GameController
     {
@@ -77,6 +88,12 @@ namespace Controller
 
         [ReadOnly] [ChangeColorLabel(0.2f, 1, 1)]
         public StateNail stateNail;
+
+        [ChangeColorLabel(0.2f, 1, 1)] [SearchableEnum]
+        public StateNumberNails stateNumberNail;
+
+        [Help("chỉ được kéo ref vào ngay ban đầu , in game sẽ tự động add vào dot")] [ChangeColorLabel(0.2f, 1, 1)]
+        public DotManager currentDot;
     }
 
     [Serializable]
